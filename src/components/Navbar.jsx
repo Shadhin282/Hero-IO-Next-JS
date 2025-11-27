@@ -1,9 +1,26 @@
+"use client";
+
 import Link from 'next/link'
 import logo from '../../public/logo.png'
 import { FaGithub } from "react-icons/fa";
 import Image from 'next/image';
+import AuthContext from '@/Authentication/AuthContext';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 export default function Navbar() {
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        
+        toast.success("Logout successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
     const links = <>
              <li>
               <Link
@@ -16,17 +33,22 @@ export default function Navbar() {
               <Link className=" font-bold " href="/apps">Apps</Link>
             </li>
             <li>
-              <Link className=" font-bold " href="/installation">Installation</Link>
+              <Link className=" font-bold " href="/installation">My Installation</Link>
             </li>
-            <li>
+      {
+        !user ? <div className='flex'>
+          <li>
               <Link className=" font-bold " href="/login">Login</Link>
             </li>
             <li>
               <Link className=" font-bold " href="/register">Register</Link>
             </li>
-            <li>
-              <Link className=" font-bold " href="">LogOut</Link>
+        </div> :
+          <li>
+              <Link className=" font-bold " onClick={handleLogout} href="">LogOut</Link>
             </li>
+            }
+            
     </>
     return (
          <div className="navbar bg-base-100 shadow-sm px-10">
