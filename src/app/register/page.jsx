@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Register() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/home";
+  const redirect =  "/home";
 
   const { createUser, setUser, googleSign, updateUser } =
     useContext(AuthContext);

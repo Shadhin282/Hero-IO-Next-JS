@@ -1,18 +1,19 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import Link from "next/link";
 import AuthContext from "@/Authentication/AuthContext";
 import { toast } from "react-toastify";
 import Loader from "@/components/Loader";
+import Image from "next/image";
 
 export default function Login() {
   const { logIn, googleSign, setUser, loading } = useContext(AuthContext);
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/home";
+  const redirect =  "/home";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -26,7 +27,9 @@ export default function Login() {
 
         setUser(res.user);
         toast.success("Successfully signed in");
-        router.push(redirect);
+        
+          router.push(redirect);
+      
       })
       .catch(() => {
         toast.error("Invalid credentials");
@@ -82,8 +85,11 @@ export default function Login() {
             onClick={handleGoogle}
             className="w-full border border-indigo-600 text-indigo-700 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-indigo-700 hover:text-white"
           >
-            <img
+            <Image
+              alt="goolge login"
               src="https://www.svgrepo.com/show/475656/google-color.svg"
+              width={300}
+              height={300}
               className="w-5 h-5"
             />
             Log in with Google
