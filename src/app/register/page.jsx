@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthContext from "@/Authentication/AuthContext";
 import { toast } from "react-toastify";
@@ -9,7 +9,6 @@ import Image from "next/image";
 
 export default function Register() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const redirect =  "/home";
 
   const { createUser, setUser, googleSign, updateUser } =

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useContext } from "react";
+import { useRouter } from "next/navigation";
+import {  useContext } from "react";
 import Link from "next/link";
 import AuthContext from "@/Authentication/AuthContext";
 import { toast } from "react-toastify";
@@ -12,7 +12,6 @@ export default function Login() {
   const { logIn, googleSign, setUser, loading } = useContext(AuthContext);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
   const redirect =  "/home";
 
   const handleLogin = (e) => {
